@@ -24,13 +24,13 @@ namespace ToDoList.Controllers
         public ViewResult Index()
         {
             // Updated:
-            return View(itemRepo.Items.ToList());
+            return View(itemRepo.Animals.ToList());
         }
 
         public IActionResult Details(int id)
         {
             // Updated:
-            Item thisItem = itemRepo.Items.FirstOrDefault(x => x.ItemId == id);
+            Animal thisItem = itemRepo.Animals.FirstOrDefault(x => x.ItemId == id);
             return View(thisItem);
         }
 
@@ -40,7 +40,7 @@ namespace ToDoList.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Item item)
+        public IActionResult Create(Animal animal)
         {
             itemRepo.Save(item);   // Updated
             // Removed db.SaveChanges() call
@@ -52,12 +52,12 @@ namespace ToDoList.Controllers
         public IActionResult Edit(int id)
         {
             // Updated:
-            Item thisItem = itemRepo.Items.FirstOrDefault(x => x.ItemId == id);
+            Animal thisItem = itemRepo.Animal.FirstOrDefault(x => x.ItemId == id);
             return View(thisItem);
         }
 
         [HttpPost]
-        public IActionResult Edit(Item item)
+        public IActionResult Edit(Animal item)
         {
             itemRepo.Edit(item);   // Updated!
             // Removed db.SaveChanges() call
@@ -66,7 +66,7 @@ namespace ToDoList.Controllers
         public IActionResult Delete(int id)
         {
             // Updated:
-            Item thisItem = itemRepo.Items.FirstOrDefault(x => x.ItemId == id);
+            Animal thisItem = itemRepo.Animals.FirstOrDefault(x => x.ItemId == id);
             return View(thisItem);
         }
 
@@ -74,7 +74,7 @@ namespace ToDoList.Controllers
         public IActionResult DeleteConfirmed(int id)
         {
             // Updated:
-            Item thisItem = itemRepo.Items.FirstOrDefault(x => x.ItemId == id);
+            Animal thisAnimal = itemRepo.Animals.FirstOrDefault(x => x.ItemId == id);
             itemRepo.Remove(thisItem);   // Updated!
             // Removed db.SaveChanges() call
             return RedirectToAction("Index");
