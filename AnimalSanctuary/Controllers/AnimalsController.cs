@@ -6,32 +6,32 @@ using Microsoft.AspNetCore.Mvc;
 using AnimalSanctuary.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ToDoList.Controllers
+namespace AnimalSanctuary.Controllers
 {
-    public class ItemsController : Controller
+    public class AnimalsController : Controller
     {
-        private IAnimalRepository itemRepo;  // New!
+        private IAnimalRepository animalRepo;  // New!
 
-        public ItemsController()
+        public AnimalsController()
         {
-            itemRepo = new EFAnimalRepository();
+            animalRepo = new EFAnimalRepository();
         }
-        public ItemsController(IItemRepository repo)
+        public AnimalsController(IAnimalRepository repo)
         {
-            itemRepo = repo;
+            animalRepo = repo;
         }
 
         public ViewResult Index()
         {
             // Updated:
-            return View(itemRepo.Animals.ToList());
+            return View(animalRepo.Animals.ToList());
         }
 
         public IActionResult Details(int id)
         {
             // Updated:
-            Animal thisItem = itemRepo.Animals.FirstOrDefault(x => x.ItemId == id);
-            return View(thisItem);
+            Animal thisAnimal = animalRepo.Animals.FirstOrDefault(x => x.AnimalId == id);
+            return View(thisAnimal);
         }
 
         public IActionResult Create()
@@ -42,7 +42,7 @@ namespace ToDoList.Controllers
         [HttpPost]
         public IActionResult Create(Animal animal)
         {
-            itemRepo.Save(item);   // Updated
+            animalRepo.Save(animal);   // Updated
             // Removed db.SaveChanges() call
             //return RedirectToAction("Index");
             return View("Index");
@@ -52,30 +52,30 @@ namespace ToDoList.Controllers
         public IActionResult Edit(int id)
         {
             // Updated:
-            Animal thisItem = itemRepo.Animal.FirstOrDefault(x => x.ItemId == id);
-            return View(thisItem);
+            Animal thisAnimal = animalRepo.Animals.FirstOrDefault(x => x.AnimalId == id);
+            return View(thisAnimal);
         }
 
         [HttpPost]
-        public IActionResult Edit(Animal item)
+        public IActionResult Edit(Animal animal)
         {
-            itemRepo.Edit(item);   // Updated!
+            animalRepo.Edit(animal);   // Updated!
             // Removed db.SaveChanges() call
             return RedirectToAction("Index");
         }
         public IActionResult Delete(int id)
         {
             // Updated:
-            Animal thisItem = itemRepo.Animals.FirstOrDefault(x => x.ItemId == id);
-            return View(thisItem);
+            Animal thisAnimal = animalRepo.Animals.FirstOrDefault(x => x.AnimalId == id);
+            return View(thisAnimal);
         }
 
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
             // Updated:
-            Animal thisAnimal = itemRepo.Animals.FirstOrDefault(x => x.ItemId == id);
-            itemRepo.Remove(thisItem);   // Updated!
+            Animal thisAnimal = animalRepo.Animals.FirstOrDefault(x => x.AnimalId == id);
+            animalRepo.Remove(thisAnimal);   // Updated!
             // Removed db.SaveChanges() call
             return RedirectToAction("Index");
         }

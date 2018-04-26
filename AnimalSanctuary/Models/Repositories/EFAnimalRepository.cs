@@ -4,23 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using AnimalSanctuary.Models;
 
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace AnimalSanctuary.Models
 {
-    public class EFAnimalRepository : IAnimalSanctuaryRepository
+    public class EFAnimalRepository : IAnimalRepository
     {
         AnimalSanctuaryContext db = new AnimalSanctuaryContext();
     
-
-    // GET: /<controller>/
-    public IActionResult Index()
-        {
-            return View();
-        }
-
         public IQueryable<Animal> Animals
         { get { return db.Animals; } }
 
